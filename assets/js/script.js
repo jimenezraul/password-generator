@@ -11,18 +11,19 @@ var generatePassword = function () {
 
   // Prompt user for password length from 8 to 128 characters
   var passwordLengthPrompt = function () {
-    let passwordLength = prompt(
+    let passLength = prompt(
       "How many characters would you like your password to be? from 8 to 128"
     );
-    if (passwordLength.match(/[^0-9]/) || parseInt(passwordLength) < 8 || parseInt(passwordLength) > 128) {
+    if (passLength.match(/[^0-9]/) || parseInt(passLength) < 8 || parseInt(passLength) > 128) {
       alert("Please choose a number between 8 and 128");
       passwordLengthPrompt();
+    } else {
+      passwordLength = passLength;
     }
-    return passwordLength;
   };
-  // Password length is set to the variable passwordLength
-  passwordLength = passwordLengthPrompt();
 
+  passwordLengthPrompt();
+  console.log(passwordLength);
   var characterTypes = {};
 
   // Prompt user for character types to include in password
@@ -46,9 +47,8 @@ var generatePassword = function () {
       }
     }
     //If is valid, will console log the characterTypes object else will prompt user to enter again
-    if (valid) {
-      console.log(characterTypes);
-    } else {
+    
+    if (!valid) {
       alert("Please select at least one character type");
       characterTypesPrompt();
     }
