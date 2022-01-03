@@ -42,7 +42,7 @@ var generatePassword = function () {
         "Would you like to include " + type + "? OK for yes, Cancel for no"
       );
     }
-    // All character that will be prompted
+    // All character that will be prompted and added to characterTypes = {}
     characterTypes.uppercase = confirm("uppercase letters");
     characterTypes.lowercase = confirm("lowercase letters");
     characterTypes.numbers = confirm("numbers");
