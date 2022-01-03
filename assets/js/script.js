@@ -23,7 +23,7 @@ var generatePassword = function () {
   };
 
   passwordLengthPrompt();
-  console.log(passwordLength);
+  
   var characterTypes = {};
 
   // Prompt user for character types to include in password
@@ -46,7 +46,6 @@ var generatePassword = function () {
         valid = true;
       }
     }
-    //If is valid, will console log the characterTypes object else will prompt user to enter again
     
     if (!valid) {
       alert("Please select at least one character type");
