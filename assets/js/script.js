@@ -1,36 +1,45 @@
 // Assignment code here
 var generatePassword = function () {
   let password = "";
-  let passwordLength = "";
+  let passwordLength;
+  // All Characters
   const characters = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     numeric: "0123456789",
-    special: "!@#$%^&*()_+~`|}{[]:;?><,./-="
+    special: "!@#$%^&*()_+~`|}{[]:;?><,./-=",
   };
 
   // Prompt user for password length from 8 to 128 characters
   var passwordLengthPrompt = function () {
-    let passLength = prompt(
-      "How many characters would you like your password to be? from 8 to 128"
-    );
-    if (passLength.match(/[^0-9]/) || parseInt(passLength) < 8 || parseInt(passLength) > 128) {
-      alert("Please choose a number between 8 and 128");
-      passwordLengthPrompt();
+    let passLength = window.prompt("How long would you like your password to be? (8-128 characters)")
+    // When user clicks cancel, exit the function
+    if (passLength === null) {
+      return;
+    }
+    // Check if user input is a number between 8 and 128
+    passLength = parseInt(passLength);
+    if (isNaN(passLength) || passLength < 8 || passLength > 128) {
+      alert("Password length must be a number between 8 and 128");
+      return passwordLengthPrompt();
     } else {
       passwordLength = passLength;
     }
   };
 
   passwordLengthPrompt();
-  
-  var characterTypes = {};
+
+  // If passwordLength is not a number, return an empty string
+  if (isNaN(passwordLength)) {
+    return "";
+  }
 
   // Prompt user for character types to include in password
+  var characterTypes = {};
   var characterTypesPrompt = function () {
     function confirm(type) {
       return window.confirm(
-        `Would you like to include ${type}? Select 'OK' for yes or 'Cancel' for no.`
+        "Would you like to include " + type + "? OK for yes, Cancel for no"
       );
     }
     // All character that will be prompted
@@ -46,7 +55,7 @@ var generatePassword = function () {
         valid = true;
       }
     }
-    
+    // If user input is not valid, prompt again
     if (!valid) {
       alert("Please select at least one character type");
       characterTypesPrompt();
@@ -54,9 +63,9 @@ var generatePassword = function () {
   };
 
   characterTypesPrompt();
-  
-  let characterString = "";
 
+  // If user input is valid, concatenate all characters into one string
+  let characterString = "";
   if (characterTypes.uppercase) {
     characterString += characters.uppercase;
   }
@@ -70,7 +79,7 @@ var generatePassword = function () {
     characterString += characters.special;
   }
 
-  // Generate password
+  // Generate password based on user input
   for (let i = 0; i < passwordLength; i++) {
     password += characterString.charAt(
       Math.floor(Math.random() * characterString.length)
