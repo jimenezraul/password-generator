@@ -12,7 +12,9 @@ var generatePassword = function () {
 
   // Prompt user for password length from 8 to 128 characters
   var passwordLengthPrompt = function () {
-    let passLength = window.prompt("How long would you like your password to be? (8-128 characters)")
+    let passLength = window.prompt(
+      "How long would you like your password to be? (8-128 characters)"
+    );
     // When user clicks cancel, exit the function
     if (passLength === null) {
       return;
